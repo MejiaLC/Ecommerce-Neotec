@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    <style>
+      .formulario form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .formulario input {
+        width: 25%;
+        padding: 10px;
+        border-radius: 10px;
+        outline: none;
+      }
+
+      .formulario textarea {
+        width: 25%;
+        padding: 10px;
+        outline: none;
+      }
+
+      .card {
+        border-color: 1px solid #000;
+        width: auto;
+      }
+      nav {
+        background-color: #000;
+        position: relative;
+      }
+      li {
+        display: inline-block;
+      }
+
+      li {
+        list-style: none;
+        margin: 0 10px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Helvetica, sans-serif;
+        box-sizing: border-box;
+      }
+      a {
+        text-decoration: none;
+        border: 1px solid black;
+        display: block;
+        color: white;
+        padding: 20px;
+      }
+      .panelAdmin {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      textarea {
+        text-align: left;
+      }
+      .actualizar {
+        background-color: #ffc107;
+        padding: 0.375rem 0.75rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        width: 100px;
+        font-weight: 400;
+        font-size: 1rem;
+        border: 1px solid transparent;
+        margin: 10px 575px 0 575px;
+        text-align: center;
+        color: #000;
+      }
+      .actualizar:hover {
+        background-color: #967e36;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+          border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="logo" href="/home">NEOTEC</a></li>
+          <div class="panelAdmin">
+            <li><a class="panelSesion" href="/">Cerrar sesión</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="formulario">
+        <div class="card">
+          <form action="/actualizar/<%= data.id %>" method="POST">
+            <label for="producto">Producto</label>
+            <input
+              type="text"
+              name="producto"
+              value="<%= data.producto %>"
+              placeholder="Ingresa el nombre del producto"
+              required
+            />
+            <label for="descripcion">Descripcion</label>
+            <textarea
+              name="descripcion"
+              rows="5"
+              cols="50"
+              placeholder="Ingresa la descripcion"
+              required
+            ><%= data.descripcion %></textarea
+            >
+            <label for="precio">Precio</label>
+            <input
+              type="text"
+              name="precio"
+              value="<%= data.precio %>"
+              placeholder="Ingresa el precio"
+              required
+            />
+            <label for="cantidad">Cantidad</label>
+            <input
+              type="number"
+              name="cantidad"
+              value="<%= data.cantidad %>"
+              placeholder="Ingrese cantidad del producto"
+              required
+            />
+            <input type="submit" value="Actualizar" class="actualizar" />
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

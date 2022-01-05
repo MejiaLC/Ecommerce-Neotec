@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/home" class="regresar">Inicio</a>
+    <div class="productos">
+        <% if(data.length>0) { %>
+            <% for(var i=0; i< data.length; i++){ %>
+                <div class="tarjeta">
+                    <img src="<%= imagenes[i] %>" id="imagen" class="imagen">
+                    <div class="descripcion">
+                        <input type="hidden" id="prueba" class="prueba" value="<%= data[i].id %>">
+                        <input type="hidden" id="longitud" class="longitud" value="<%= data.length %>">
+                        <%= data[i].descripcion %>
+                    </div>
+                    <div class="precio">
+                        <p>$<%= data[i].precio %></p>
+                    </div>
+                    <div class="informacion">
+                        <a href="/producto/<%= data[i].id %>">VER MAS</a>                     
+                    </div>
+                </div>
+            <%} %>
+        <% } %>
+    </div>
+
+    <script>
+
+        let imagen = document.getElementsByClassName('imagen');
+        let longitud = document.getElementById('longitud').value;
+        let prueba = document.getElementsByClassName('prueba');
+    
+        for(let i = 0; i< longitud; i++){
+            console.log(imagen[i]);
+            imagen[i].src = prueba[i].value + '-neotec.png'
+        }
+    
+    </script>
+    
+</body>
+</html>

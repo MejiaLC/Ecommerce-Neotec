@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/styles.css">
+
+    <title>Neotec - Articulo</title>
+</head>
+<body>
+    <a href="/home" class="regresar">Inicio</a>
+    <div class="formProducto">         
+        <form action="/carrito/" method="POST">
+            <br>
+            <input type="hidden" name="id" value="<%= data.id %>">
+            <input type="hidden" name="producto" value="<%= data.producto %>">
+            <h1 class="productoCampo"><%= data.producto %></h1>
+            <br>
+            <input type="hidden" name="descripcion" value="<%= data.descripcion %>">
+            <h3 class="descripcionProducto"><%= data.descripcion %></h3>
+            <br>
+            <input type="hidden" name="precio" value="<%= data.precio %>">
+            <span class="precioProducto">$<%= data.precio %></span>
+            <br>
+            <label for="">Cantidad</label>
+            <select name="cantidad" class="cantidadProducto">
+                <% for(var i=0; i< data.cantidad; i++){ %>
+                    <option value="<%= i + 1 %>"><%= i + 1 %></option>
+                <%} %>
+            </select>
+            <label for="" class="cantidadProducto">( <%= data.cantidad %> disponibles )</label>
+            <br>
+            <input type="submit" class="enviarCarrito" value="Añadir al carrito">
+        </form>
+        <img src="/producto/">
+    </div>       
+</body>
+</html>

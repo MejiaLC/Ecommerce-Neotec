@@ -1,0 +1,67 @@
+<% switch (estado) {
+    case true : %>
+        <%- include ('partials/adminHeader')  %>
+            <% break;
+    
+    case false : %>
+        <%- include ('partials/userHeader')  %>
+            <% break;    
+} %> 
+
+    <main>
+    
+    <div class="slider">
+        <ul>
+            <li><img src="images/gratis.jpg"></li>    
+            <li><img src="images/gratis.jpg"></li> 
+            <li><img src="images/gratis.jpg"></li>       
+            <li><img src="images/computador.jpg"></li>
+            <li><img src="images/mouse.jpg"></li>
+        </ul>
+    </div>
+
+    <p class="text">Productos</p>
+
+    <div class="productos">
+        <% if(data.length>0) { %>
+            <% for(var i=0; i< data.length; i++){ %>
+                <div class="tarjeta">
+                    <img src="<%= imagenes[i] %>" id="imagen" class="imagen">
+                    <div class="descripcion">
+                        <input type="hidden" id="prueba" class="prueba" value="<%= data[i].id %>">
+                        <input type="hidden" id="longitud" class="longitud" value="<%= data.length %>">
+                        <%= data[i].descripcion %>
+                    </div>
+                    <div class="precio">
+                        <p>$<%= data[i].precio %></p>
+                    </div>
+                    <div class="informacion">
+                        <a href="/producto/<%= data[i].id %>">VER MAS</a>                     
+                    </div>
+                </div>
+            <%} %>
+        <% } %>
+    </div>
+
+    </main>
+
+    <footer>
+        <span>Proyecto NeoTec - Practica</span>
+        <span>Tecnologico de Antioquia</span>
+        <span>2021</span>
+    </footer>
+  
+<script>
+
+    let imagen = document.getElementsByClassName('imagen');
+    let longitud = document.getElementById('longitud').value;
+    let prueba = document.getElementsByClassName('prueba');
+
+    for(let i = 0; i< longitud; i++){
+        console.log(imagen[i]);
+        imagen[i].src = prueba[i].value + '-neotec.png'
+    }
+
+</script>
+</body>
+</html>

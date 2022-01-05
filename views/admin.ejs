@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <title>Inicio</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a class="logo" href="/home">NEOTEC</a></li>
+                <div class="panelAdmin">
+                    <li><a class="panelSesion" href="/cerrar">Cerrar sesión</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="formulario">
+            <div class="card">
+                <form action="/admin" method="POST" enctype="multipart/form-data">
+                    <label for="producto">Producto</label>
+                    <input type="text" name="producto" placeholder="Ingresa el nombre del producto" maxlength="32" required>
+                    <label for="descripcion">Descripcion</label>
+                    <textarea name="descripcion" rows="5" cols="50" placeholder="Ingresa la descripcion" maxlength="61" required></textarea>
+                    <label for="precio">Precio</label>
+                    <input type="text" name="precio" placeholder="Ingresa el precio" required>
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" placeholder="Ingrese cantidad del producto" required>
+                    <label for="imagen">Imagen</label>
+                    <input type="file" name="imagen" required>
+                    <input type="submit" value="Guardar" class="guardar">                  
+                </form>
+                <a href="/stock" class="stock">Ver productos sin stock</a>
+            </div>
+        </div>
+        <div class="tabla" style="margin-top: 50px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <% if (data) { %>
+
+                                <% for(var i=0; i< data.length; i++){ %>
+                                    <tr>
+                                        <td><%= data[i].id %></td>
+                                        <td><%= data[i].producto  %></td>
+                                        <td><%= data[i].descripcion  %></td>
+                                        <input type="hidden" id="prueba" class="prueba" value="<%= data[i].id %>">
+                                        <input type="hidden" id="longitud" class="longitud" value="<%= data.length %>">
+                                        <td><%= data[i].precio  %></td>
+                                        <td><%= data[i].cantidad %></td>
+                                        <td><img src="<%= imagenes[i] %>" id="imagen" class="imagen" width="100px" height="70px"> </td>
+                                        <td>
+                                            <a href="/delete/<%= data[i].id %>" class="eliminar">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                <%} %>  
+                            <% } %>
+                        </tr>
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </main>
+
+    <script>
+
+        let imagen = document.getElementsByClassName('imagen');
+        let longitud = document.getElementById('longitud').value;
+        let prueba = document.getElementsByClassName('prueba');
+    
+        for(let i = 0; i< longitud; i++){
+            console.log(imagen[i]);
+            imagen[i].src = prueba[i].value + '-neotec.png'
+        }
+    
+    </script>
+</body>

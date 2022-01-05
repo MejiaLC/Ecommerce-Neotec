@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <title>Inicio</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a class="logo" href="/home">NEOTEC</a></li>
+                <li>
+                <form action="/buscar" method="POST">
+                    <input type="text" placeholder="Buscar productos" name="buscar" id="buscar" required>
+                    <input type="submit" value="Buscar" class="buscarInput" >
+                </form>
+                </li>
+                <li><a class="sesion" href="/cerrar">Cerrar sesión</a></li>
+                <li><a class="carrito" href="/carrito">Mi carrito</a></li>
+            </ul>
+        </nav>
+    </header>

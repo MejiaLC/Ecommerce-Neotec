@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+    <title>Carrito de compras</title>
+  </head>
+  <body>
+    <a href="/home" class="regresar">Inicio</a>
+    <div class="productos-2">
+      <h2 class="comprasCart">Mi carrito de compras</h2>
+      <% if(data.length>0) { %> <% for(var i=0; i< data.length; i++){ %>
+      <div class="tarjeta-2">
+        <img src="<%= imagenes[i] %>" id="imagen" class="imagen" />
+        <div class="descripcion">
+          <input
+            type="hidden"
+            class="cantidad"
+            value="<%= data[i].cantidad %>"
+          />
+          ID: <%= data[i].idProducto %> <%= data[i].descripcion %>
+        </div>
+        <div class="precio">
+          <p>$<%= data[i].precio %></p>
+        </div>
+        <div class="cantidad">Cantidad: <%= data[i].cantidad %></div>
+        <div class="importante">
+          <input
+            type="hidden"
+            id="prueba"
+            class="prueba"
+            value="<%= data[i].idProducto %>"
+          />
+          <input
+            type="hidden"
+            id="longitud"
+            class="longitud"
+            value="<%= data.length %>"
+          />
+        </div>
+        <div class="comprador">
+          <p>
+            Precio total producto: <%= data[i].cantidad *
+            data[i].precio.replace('.', '') %>
+          </p>
+          <input
+            type="hidden"
+            class="preciosTotal"
+            value="<%= data[i].cantidad * data[i].precio.replace('.', '') %>"
+          />
+          <input type="hidden" class="cantidadProducto" value="<%= data[i].cantidad %>">
+          <a href="/deleteCarrito/<%= data[i].idProducto %>" style="width: 50%;" class="eliminar">Eliminar</a>
+        </div>
+      </div>
+      <%} %> <% } %>
+    </div>
+    <div class="total" id="contenedorTotal"></div>
+
+    <div class="formComprar">
+      <form action="/compra" method="POST">
+        <input type="hidden" id="totalPrecios" name="preciosTotal"/>
+        <input type="hidden" id="idProductos" name="idProducts">
+        <input type="hidden" id="cantidadASD" name="cantidadProducts">
+        <input type="submit" value="Comprar" class="comprarProductosCarrito" />
+      </form>
+    </div>
+
+    <script>
+      let imagen = document.getElementsByClassName("imagen");
+      let longitud = document.getElementById("longitud").value;
+      let prueba = document.getElementsByClassName("prueba");
+      let preciosTotal = document.getElementsByClassName("preciosTotal");
+      let contenedorPrecioTotal = document.getElementById("contenedorTotal");
+      let totalPreciosTODO = document.getElementById("totalPrecios");
+      let compra = document.querySelector(".comprarProductosCarrito");
+      let cantidadProducto = document.getElementsByClassName('cantidadProducto');
+      let cantidadCampo = document.getElementById('cantidadASD');
+      let id = document.getElementById('idProductos');
+      let totalPackage = 0;
+
+      let cantidadArr = []
+      let id_s = []
+
+      for (let i = 0; i < longitud; i++) {
+        //console.log(imagen[i]);
+        //console.log(preciosTotal[i].value.replace('.', ''))
+        imagen[i].src = prueba[i].value + "-neotec.png";
+        totalPackage =
+          totalPackage + parseInt(preciosTotal[i].value.replace(".", ""));
+          cantidadArr.push(cantidadProducto[i].value);
+          id_s.push(prueba[i].value);
+      }
+      //console.log("Precio total de los productos: ", totalPackage);
+      totalPackage.toLocaleString("en-US");
+      let p = document.createElement("p");
+      p.setAttribute("class", "precioTotal");
+      p.innerHTML = `$${totalPackage.toLocaleString("en-US")}`;
+      contenedorPrecioTotal.appendChild(p);
+      totalPreciosTODO.value = totalPackage;
+      cantidadASD.value = cantidadArr;
+      id.value = id_s
+
+      compra.addEventListener("click", () => {
+        alert(`Compra exitosa por un valor de ${totalPreciosTODO.value}`);
+        for (let i = 0; i < longitud; i++) {
+          console.log(prueba[i].value);
+        }
+      });
+    </script>
+  </body>
+</html>

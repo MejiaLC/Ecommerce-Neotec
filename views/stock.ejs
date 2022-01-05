@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <title>Inicio</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a class="logo" href="/home">NEOTEC</a></li>
+                <div class="panelAdmin">
+                    <li><a class="panelSesion" href="/">Cerrar sesión</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 style="text-align: center; margin-top: 5px;">Productos sin stock</h1>
+        <div class="tabla" style="margin-top: 50px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <% if (data) { %>
+
+                                <% for(var i=0; i< data.length; i++){ %>
+                                    <input type="hidden" id="prueba" class="prueba" value="<%= data[i].id %>">
+                                    <input type="hidden" id="longitud" class="longitud" value="<%= data.length %>">
+                                    <tr>
+                                        <td><%= data[i].producto  %></td>
+                                        <td><%= data[i].descripcion  %></td>
+                                        <td><%= data[i].precio  %></td>
+                                        <td><%= data[i].cantidad %></td>
+                                        <td><img src="<%= imagenes[i] %>" width="100px" height="70px" id="imagen" class="imagen"> </td>
+                                        <td colspan="2">
+                                            <a href="/update/<%= data[i].id %>" class="actualizar2">Editar</a>
+                                            <a href="/delete/<%= data[i].id %>" class="eliminar2">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                <%} %>  
+                            <% } %>
+                        </tr>
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </main>
+<script>
+
+    let imagen = document.getElementsByClassName('imagen');
+    let longitud = document.getElementById('longitud').value;
+    let prueba = document.getElementsByClassName('prueba');
+
+    for(let i = 0; i< longitud; i++){
+        console.log(imagen[i]);
+        imagen[i].src = prueba[i].value + '-neotec.png'
+    }
+
+</script>
+</body>
